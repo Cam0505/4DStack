@@ -1,0 +1,4 @@
+# workspace.yaml
+
+load_from:
+  - python_file: dagster_project/__init__.py

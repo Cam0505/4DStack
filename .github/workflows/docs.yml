@@ -1,0 +1,67 @@
+name: Build and Publish DBT Docs
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dbt/models/**/*.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'dbt/models/**/*.yml'
+
+permissions:
+  pages: write
+  id-token: write
+  contents: write
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Set up DBT profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<EOF
+          camondagster:
+            outputs:
+              dev:
+                type: duckdb
+                path: md:${{ secrets.MOTHERDUCK }}
+                path: ${{ secrets.MOTHERDUCK }}
+                schema: public
+                threads: 2
+                extensions:
+                  - httpfs
+                  - parquet
+                  - motherduck
+            target: dev
+          EOF
+
+      - name: Set MotherDuck token
+        run: echo "MD_TOKEN=${{ secrets.MOTHERDUCK_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Install DBT packages
+        run: cd dbt && dbt deps
+
+      - name: Generate DBT docs
+        run: cd dbt && dbt docs generate
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

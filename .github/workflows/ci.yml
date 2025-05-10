@@ -1,0 +1,115 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main  # Runs when pushing to the main branch
+    paths:
+      - 'dbt/models/**/*.sql' # Only run on changes to SQL files in the dbt/models directory
+      - 'dbt/models/**/*.py'
+      - 'cam_on_dagster_dbt/assets/*.py' # Only run on changes to assets in the cam_on_dagster_dbt directory
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'dbt/models/**/*.sql'
+      - 'dbt/models/**/*.py'
+      - 'cam_on_dagster_dbt/assets/*.py'
+=======
+      - 'dbt/models/**/*.sql'
+      - 'cam_on_dagster_dbt/assets/**'
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Needed to fetch other branches like dbt-manifest-state
+
+      - name: Set up Git config
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Try to restore previous manifest from dbt-manifest-state branch
+        run: |
+          git fetch origin dbt-manifest-state || echo "No manifest branch yet"
+          git checkout origin/dbt-manifest-state -- dbt/previous-manifest/manifest.json || echo "No previous manifest found"
+        continue-on-error: true
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up DBT profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<EOF
+          camondagster:
+            outputs:
+              dev:
+                type: duckdb
+                path: ${{ secrets.MOTHERDUCK }}
+                schema: public
+                threads: 2
+                extensions:
+                  - httpfs
+                  - parquet
+                  - motherduck
+            target: dev
+          EOF
+     
+      # Restore previous manifest cache
+      - name: Restore DBT manifest cache
+        uses: actions/cache@v3
+        with:
+          path: dbt/previous-manifest
+          key: dbt-state-${{ github.ref_name }}
+
+      - name: Install DBT packages
+        run: cd dbt && dbt deps
+
+      - name: Run DBT build (with fallback)
+        run: |
+          cd dbt
+          if [ -f previous-manifest/manifest.json ]; then
+            echo "Running incremental dbt build with state:modified+"
+            dbt build --select state:modified+ --state=previous-manifest
+          else
+            echo "No previous manifest. Running full dbt build"
+            dbt build
+          fi
+
+      - name: Compile DBT and prepare new state
+        run: |
+          cd dbt
+          rm -rf previous-manifest
+          dbt compile --target-path=previous-manifest
+          echo "New manifest generated at dbt/previous-manifest"
+        
+      - name: Save updated manifest to cache
+        uses: actions/cache@v3
+        with:
+          path: dbt/previous-manifest
+          key: dbt-state-${{ github.ref_name }}
+        
+      - name: Check cache status
+        run: |
+          if [ -d dbt/previous-manifest ]; then
+            echo "Cache restored successfully."
+          else
+            echo "Cache not found or restored."
+          fi

@@ -1,0 +1,95 @@
+# === Git ===
+.git
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.so
+*.log
+
+# === Virtual Environments ===
+.venv/
+venv/
+env/
+
+# === Dotenv / Local Environment Files ===
+.env
+.env.*
+*.local
+
+# === Dagster ===
+*.dagster/
+<<<<<<< HEAD
+<<<<<<< HEAD
+dagster_cam/.dlt/secrets.toml
+dagster_cam/.dlt/config.toml
+=======
+cam_on_dagster_dbt/assets/.dlt/
+cam_on_dagster_dbt/assets/.dlt/secrets.toml
+cam_on_dagster_dbt/assets/.dlt/config.toml
+>>>>>>> afb9b9d (DBT Slim CI via  State Branch)
+=======
+dagster_cam/.dlt/secrets.toml
+dagster_cam/.dlt/config.toml
+>>>>>>> dd65c14 (Updating all my assets to use dagster dbt handler, cleaning up the logic)
+
+
+dagster_cam/.dlt/*/load
+dagster_cam/.dlt/*/normalize
+dagster_cam/.dlt/*/trace.pickle
+dagster_cam/.dlt/.anonymous_id
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+dagster_home/*/* 
+=======
+>>>>>>> dd65c14 (Updating all my assets to use dagster dbt handler, cleaning up the logic)
+=======
+
+dagster_home/*/* 
+>>>>>>> 21c38e0 (Updating another Dagster Asset to use IO Manager)
+# === Jupyter Notebooks ===
+.ipynb_checkpoints/ 
+
+# === VS Code ===
+.vscode/
+
+# === DB / DuckDB ===
+*.duckdb
+*.db
+
+# === Docker ===
+.docker/
+docker-compose.override.yml
+
+# === DBT ===
+dbt/profiles.yml
+dbt/dbt_packages/
+
+# === Google Cloud / Secrets ===
+keys/
+keys/credentials.json
+keys/dagster-sa-key.json
+
+request_cache/*
+!request_cache/.gitkeep
+<<<<<<< HEAD
+
+.dlt/
+
+# Terraform files
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+terraform/terraform.tfvars
+.tfvars
+terraform/terraform_commands.txt
+
+# Ignore all local terraform plans except committed *.tf files
+terraform/*.binary
+terraform/*.json
+
+.github/workflows/example.yml
+=======
+>>>>>>> dd65c14 (Updating all my assets to use dagster dbt handler, cleaning up the logic)

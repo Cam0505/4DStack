@@ -1,0 +1,14 @@
+version: 2
+snapshots:
+- name: glass_type_snapshot
+  description: ''
+  columns:
+  - name: beverage_id
+    description: ''
+    data_tests:
+    - not_null
+    - unique
+  - name: glass_type
+    description: ''
+  - name: glass_type_sk
+    description: ''

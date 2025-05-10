@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: beverages
+    database: camondagster
+    schema: public
+    tables:
+<<<<<<< HEAD
+=======
+    # Alcoholic
+>>>>>>> aae1518 (Done! Slim CI!)
+      - name: alcoholic_table
+    # Consumption Fact
+      - name: beverage_fact_data
+        meta:
+          dagster:
+            asset_key: ["beverage_fact_data"]
+    # Beverage Type
+      - name: beverages_table
+    # Glass Type
+      - name: glass_table
+    # Ingredients
+      - name: ingredients_table

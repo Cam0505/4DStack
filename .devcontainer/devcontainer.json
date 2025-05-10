@@ -1,0 +1,48 @@
+{
+  "name": "4DStack",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "cacheFrom": "4dstack-app:latest",
+    "context": ".."
+  },
+  "runArgs": [
+    "--cpus=4",
+    "--memory=4g",
+    "--init"
+  ],
+  "features": {
+    "docker-in-docker": {
+      "version": "latest",
+      "moby": true
+    }
+  },
+  "postStartCommand": ".devcontainer/startup.sh",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "dbt.profilesDir": "${containerWorkspaceFolder}/dbt",
+        "python.linting.enabled": true,
+        "python.envFile": "${containerWorkspaceFolder}/.env"
+      },
+      "extensions": [
+        "ms-python.python",
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "ms-python.vscode-pylance",
+=======
+>>>>>>> aae1518 (Done! Slim CI!)
+=======
+        "ms-python.vscode-pylance",
+>>>>>>> d0c64ed (Improving Docker and devcontainer setup)
+        "dbt-labs.dbt"
+      ]
+    }
+  },
+  "containerEnv": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "PYTHONPATH": "/workspaces/4DStack",
+    "ENV_FILE": "${containerWorkspaceFolder}/.env"
+  }
+}
