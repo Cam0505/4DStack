@@ -1,4 +1,4 @@
-# camonprefect/path_config.py
+
 from pathlib import Path
 import os
 import sys
@@ -10,7 +10,7 @@ from functools import lru_cache
 def get_project_root():
     """Resolves the correct root path across all environments."""
     search_paths = [
-        Path("/workspaces/CamOnDagster"),  # Devcontainer
+        Path("/workspaces/4DStack"),  # Devcontainer
         Path(__file__).parent.parent,      # Local dev
         Path.cwd()                         # Fallback
     ]
