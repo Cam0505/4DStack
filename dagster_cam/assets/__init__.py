@@ -8,7 +8,6 @@ from .airlines import (
     airports_asset,
     planes_asset
 )
-from .uv import uv_asset, dbt_uv_data
 from .Beverages import (
     ingredients_table,
     alcoholic_table,
@@ -24,7 +23,6 @@ from .Meals import (
     dbt_meals_data,
 )
 from .GeoAPI import get_geo_data, dbt_geo_data
-from .openlibrary import openlibrary_books_asset, openlibrary_subjects_asset,  dbt_openlibrary_data
 from .rick_and_morty import rick_and_morty_asset, dbt_rick_and_morty_data
 
 __all__ = [
@@ -43,9 +41,6 @@ __all__ = [
     "dbt_meals_data",
     "get_geo_data",
     "dbt_geo_data",
-    "openlibrary_books_asset",
-    "openlibrary_subjects_asset",
-    "dbt_openlibrary_data",
     "rick_and_morty_asset",
     "dbt_rick_and_morty_data",
     "openmeteo_asset",
@@ -54,7 +49,5 @@ __all__ = [
     "airlines_asset",
     "routes_asset",
     "airports_asset",
-    "planes_asset",
-    "uv_asset",
-    "dbt_uv_data",
+    "planes_asset"
 ]
