@@ -1,8 +1,8 @@
 {
-  "name": "CamOnDagster",
+  "name": "4DStack",
   "build": {
     "dockerfile": "Dockerfile",
-    "cacheFrom": "camondagster-app:latest",
+    "cacheFrom": "4dstack-app:latest",
     "context": ".."
   },
   "runArgs": [
@@ -33,7 +33,7 @@
     }
   },
   "containerEnv": {
-    "PYTHONPATH": "/workspaces/CamOnDagster",
+    "PYTHONPATH": "/workspaces/4DStack",
     "ENV_FILE": "${containerWorkspaceFolder}/.env"
   }
 }
