@@ -4,8 +4,6 @@ from dagster_cam.assets import (
     dbt_models,
     get_geo_data,
     dbt_geo_data,
-    openlibrary_books_asset,
-    dbt_openlibrary_data,
     rick_and_morty_asset,
     dbt_rick_and_morty_data,
     meals_dim_data,
@@ -21,21 +19,18 @@ from dagster_cam.assets import (
     openmeteo_asset,
     dbt_meteo_data,
     youtube_pipeline,
-    airlines,
-    uv_asset,
+    airlines
 )
 from dagster_cam.jobs import (
     gsheets_financial_with_dbt_job,
     beverage_dim_job,
     meals_dim_job,
     geo_data_job,
-    openlibrary_job,
     RickandMorty_job,
     run_dbt_assets,
     open_meteo_job,
     Youtube_Job,
-    airline_job,
-    uv_job,
+    airline_job
 )
 from dagster_cam.schedules import schedules
 from dagster_cam.sensors import camon_sensor
@@ -48,8 +43,7 @@ __all__ = [
     "dbt_models",
     "get_geo_data",
     "dbt_geo_data",
-    "openlibrary_books_asset",
-    "dbt_openlibrary_data",
+    
     "rick_and_morty_asset",
     "dbt_rick_and_morty_data",
     "meals_dim_data",
@@ -66,19 +60,18 @@ __all__ = [
     "dbt_meteo_data",
     "youtube_pipeline",
     "airlines",
-    "uv_asset",
+    
     # Jobs
     "gsheets_financial_with_dbt_job",
     "beverage_dim_job",
     "meals_dim_job",
     "geo_data_job",
-    "openlibrary_job",
+    
     "RickandMorty_job",
     "run_dbt_assets",
     "open_meteo_job",
     "Youtube_Job",
     "airline_job",
-    "uv_job",
     # Others
     "schedules",
     "camon_sensor",
