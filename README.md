@@ -1,4 +1,4 @@
-# CamOnDagsterDbt
+# 4DStack
 
 A containerized data engineering project combining [Dagster](https://dagster.io/), [dbt](https://www.getdbt.com/), and [DLT](https://docs.dltHub.com/) to orchestrate, transform, and manage modern data workflows. It uses [MotherDuck](https://motherduck.com/) as the data warehouse with serverless compute. 
 
