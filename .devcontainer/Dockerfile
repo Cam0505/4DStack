@@ -26,6 +26,6 @@ RUN cd dbt && dbt deps
 COPY . .
 
 # Set working directory to match compose file
-WORKDIR /workspaces/CamOnDagster
+WORKDIR /workspaces/4DStack
 
 USER vscode
