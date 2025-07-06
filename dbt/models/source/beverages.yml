@@ -5,10 +5,6 @@ sources:
     database: camondagster
     schema: public
     tables:
-<<<<<<< HEAD
-=======
-    # Alcoholic
->>>>>>> aae1518 (Done! Slim CI!)
       - name: alcoholic_table
     # Consumption Fact
       - name: beverage_fact_data

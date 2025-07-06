@@ -1,9 +1,5 @@
 from dagster import RunRequest, SensorDefinition
-<<<<<<<< HEAD:dagster_project/sensors.py
 from dagster_project.jobs.dbt_job import run_dbt_assets
-========
-from dagster_cam.jobs.dbt_job import run_dbt_assets
->>>>>>>> 8ba1a8d (Rename of dagster section, shorter name, adding path config):dagster_cam/sensors.py
 
 dbt_sensor = SensorDefinition(
     name="dbt_sensor",

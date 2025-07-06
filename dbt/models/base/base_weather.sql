@@ -1,11 +1,7 @@
 
 -- ------------------------------------------------------------------------------
 -- Model: base_weather
-<<<<<<< HEAD
--- Description: Base Table for weather data from API, Can perform bulk loads
-=======
 -- Description: Base Table for weather data from API
->>>>>>> aae1518 (Done! Slim CI!)
 -- ------------------------------------------------------------------------------
 -- Change Log:
 -- Date       | Author   | Description

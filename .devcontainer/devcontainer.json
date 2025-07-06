@@ -8,7 +8,8 @@
   "runArgs": [
     "--cpus=4",
     "--memory=4g",
-    "--init"
+    "--init",
+    "--privileged"  // Required for Docker-in-Docker
   ],
   "features": {
     "docker-in-docker": {
@@ -27,22 +28,18 @@
       },
       "extensions": [
         "ms-python.python",
-<<<<<<< HEAD
-<<<<<<< HEAD
         "ms-python.vscode-pylance",
-=======
->>>>>>> aae1518 (Done! Slim CI!)
-=======
-        "ms-python.vscode-pylance",
->>>>>>> d0c64ed (Improving Docker and devcontainer setup)
-        "dbt-labs.dbt"
+        "dbt-labs.dbt",
+        "github.vscode-github-actions",
+        "GitHub.copilot"
       ]
     }
   },
   "containerEnv": {
-<<<<<<< HEAD
-<<<<<<< HEAD
     "PYTHONPATH": "/workspaces/4DStack",
-    "ENV_FILE": "${containerWorkspaceFolder}/.env"
-  }
+    "ENV_FILE": "${containerWorkspaceFolder}/.env",
+    "DBT_PROFILES_DIR": "${containerWorkspaceFolder}/dbt",
+    "DAGSTER_HOME": "/workspaces/4DStack/dagster_home",
+
+  },
 }

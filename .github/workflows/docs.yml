@@ -37,11 +37,10 @@ jobs:
         run: |
           mkdir -p ~/.dbt
           cat > ~/.dbt/profiles.yml <<EOF
-          camondagster:
+          4DStack:
             outputs:
               dev:
                 type: duckdb
-                path: md:${{ secrets.MOTHERDUCK }}
                 path: ${{ secrets.MOTHERDUCK }}
                 schema: public
                 threads: 2

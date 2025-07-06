@@ -231,6 +231,7 @@ def openmeteo_asset(context: AssetExecutionContext) -> bool:
         pipelines_dir=str(DLT_PIPELINE_DIR),
         dataset_name="weather_data"
     )
+    row_max_min_dict = {}
 
     try:
         dataset = pipeline.dataset()["daily_weather"].df()
@@ -252,11 +253,9 @@ def openmeteo_asset(context: AssetExecutionContext) -> bool:
     except PipelineNeverRan:
         context.log.warning(
             "⚠️ No previous runs found for this pipeline. Assuming first run.")
-        row_max_min_dict = {}
     except DatabaseUndefinedRelation:
         context.log.warning(
             "⚠️ Table Doesn't Exist. Assuming truncation.")
-        row_max_min_dict = {}
 
     source = openmeteo_source(
         cities=cities,

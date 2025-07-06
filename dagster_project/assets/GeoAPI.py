@@ -149,27 +149,22 @@ def get_geo_data(context: AssetExecutionContext) -> bool:
         dev_mode=False
     )
 
+    row_counts_dict = {}
     try:
         dataset = pipeline.dataset()["geo_cities"].df()
         if dataset is not None:
             row_counts = dataset.groupby(
                 "country_code").size().reset_index(name="count")
-            context.log.info(f"Grouped Row Counts:\n{row_counts}")
+            if row_counts is not None:
+                row_counts_dict = dict(
+                    zip(row_counts["country_code"], row_counts["count"]))
     except PipelineNeverRan:
         context.log.warning(
             "⚠️ No previous runs found for this pipeline. Assuming first run.")
-        row_counts = None
+        row_counts_dict = {}
     except DatabaseUndefinedRelation:
         context.log.warning(
             "⚠️ Table Doesn't Exist. Assuming deletion.")
-        row_counts = None
-
-    if row_counts is not None:
-        row_counts_dict = dict(
-            zip(row_counts["country_code"], row_counts["count"]))
-    else:
-        context.log.warning(
-            "⚠️ No tables found yet in dataset — assuming first run.")
         row_counts_dict = {}
 
     source = geo_source(context, row_counts_dict=row_counts_dict)

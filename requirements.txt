@@ -13,7 +13,7 @@ dagster-postgres==0.26.18
 docker==7.1.0
 # dlt and dependencies
 dlt==1.10.0
-duckdb==1.2.2
+duckdb==1.3.1
 gitdb==4.0.12
 
 google-auth==2.40.0
@@ -24,7 +24,7 @@ numpy==2.2.5
 
 # Google Sheets
 gspread==6.2.0
-
+ 
 # Development tools
 python-dotenv==1.1.0
 psycopg2-binary==2.9.10
@@ -33,3 +33,4 @@ psycopg2-binary==2.9.10
 pyarrow>=10.0.0  # Often needed for pandas/dlt
 sqlalchemy>=2.0.40  # Required by dbt-core
 dlt[motherduck]
+sqlfluff==3.4.1

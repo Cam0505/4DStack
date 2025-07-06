@@ -7,11 +7,7 @@ services:
         - 4dstack-app:latest
     user: vscode
     volumes:
-<<<<<<< HEAD
       - ../:/workspaces/4dstack:cached
-=======
-      - ../:/workspaces/CamOnDagster:cached
->>>>>>> 21c38e0 (Updating another Dagster Asset to use IO Manager)
     environment:
       - DLT_TELEMETRY=off
       - DBT_PROFILES_DIR=/workspaces/4dstack/dbt
@@ -57,10 +53,6 @@ services:
 
 volumes:
   postgres_data:
-<<<<<<< HEAD
-
-=======
->>>>>>> aae1518 (Done! Slim CI!)
 
 
 networks:

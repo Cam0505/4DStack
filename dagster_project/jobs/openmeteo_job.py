@@ -1,5 +1,5 @@
 from dagster import job, define_asset_job
-from dagster_cam.assets.open_meteo import openmeteo_asset, dbt_meteo_data
+from dagster_project.assets.open_meteo import openmeteo_asset, dbt_meteo_data
 
 
 # @job(tags={"source": "Open_Meteo"})
