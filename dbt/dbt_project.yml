@@ -3,7 +3,7 @@
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'fourDStack'
-version: '1.0.0'
+version: '1.9.0'
 
 
 # This setting configures which "profile" dbt uses for this project.
@@ -25,7 +25,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 
 models:
-  4DStack:
+  fourDStack:
     base:
         # +required_tests: {"unique.*|not_null": 1}
       +schema: base
@@ -38,6 +38,6 @@ models:
       +schema: common
       +materialized: table
 snapshots:
-  4DStack:
+  fourDStack:
     +path: snapshots
     +tags: snapshot_dependencies

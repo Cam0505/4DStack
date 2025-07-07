@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Change to the project directory
+cd /workspaces/4DStack
+
 # Start Postgres service using docker compose
 echo "Starting Postgres service with docker compose..."
 docker compose up -d postgres

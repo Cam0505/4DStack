@@ -3,12 +3,12 @@ To add a daily schedule that materializes your dbt assets, uncomment the followi
 """
 
 from dagster import ScheduleDefinition
-from dagster_project.jobs.dbt_job import run_dbt_assets
+from dagster_project.jobs.dbt_job import dbt_job
 from dagster_project.jobs.beverage_data_job import beverage_dim_job
 
 
 schedules = ScheduleDefinition(
-    job=run_dbt_assets,
+    job=dbt_job,
     cron_schedule="0 6 * * *",  # Daily at 6 AM
 )
 

@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p ~/.dbt
           cat > ~/.dbt/profiles.yml <<EOF
-          4DStack:
+          fourDStack:
             outputs:
               dev:
                 type: duckdb

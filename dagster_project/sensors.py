@@ -1,8 +1,8 @@
 from dagster import RunRequest, SensorDefinition
-from dagster_project.jobs.dbt_job import run_dbt_assets
+from dagster_project.jobs.dbt_job import dbt_job
 
 dbt_sensor = SensorDefinition(
     name="dbt_sensor",
-    evaluation_fn=lambda _: [RunRequest(run_key=None, job=run_dbt_assets)],
+    evaluation_fn=lambda _: [RunRequest(run_key=None, job=dbt_job)],
     minimum_interval_seconds=60 * 5,
 )

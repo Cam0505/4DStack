@@ -23,12 +23,8 @@ This folder contains the **dbt project** powering the transformation layer of th
 
 - **Sources**:
   - `rick_and_morty`: Characters, episodes, and locations.
-  - `openlibrary`: Book, author, and subject metadata.
-  - `Beverages`: Beverages, ingredient, and glass.
-  - `GSheets`: Google Sheets stock data.
-  - `Meals`: Meals, ingredient, and country.
   - `geo`: City and country location metadata.
-  - `uv`, `weather`: Environmental data like UV index and weather stats.
+  - `weather`: Environmental data like weather stats.
 
 - **Transformations**:
   - Each source has a corresponding staging layer with column renames, typing, and documentation.
@@ -49,6 +45,6 @@ The project uses GitHub Pages to serve dbt docs from the target/ folder.
 
 The docs are built in CI and committed to main.
 
-Live site: https://cam0505.github.io/CamOnDagsterDbt/
+Live site: https://cam0505.github.io/4DStack/
 Still a work in progress
 

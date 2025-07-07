@@ -1,22 +1,10 @@
 
 # A
-{% docs alcoholic_type %}
-    The alcoholic content type of the beverage. The possible values are:
-    - `Non alcoholic`: The beverage contains no alcohol.
-    - `Optional alcohol`: The beverage can optionally include alcohol.
-    - `Alcoholic`: The beverage contains alcohol.
-{% enddocs %}
 # B
 {% docs base_geo_description %}
     The `base_geo` model contains foundational geographic data that can be used to enrich other datasets with location context. It includes information like city name, country, coordinates, and region grouping.
 
     This model is useful for joining geographic metadata into analytical datasets.
-{% enddocs %}
-
-{% docs base_uv_description %}
-    The `base_uv` model contains UV index data for various locations, along with ozone levels. It is useful for analyzing the intensity of UV radiation and its relationship to environmental factors such as ozone.
-
-    This model is useful when working with environmental data, weather patterns, or other geospatial analytics.
 {% enddocs %}
 
 {% docs base_weather_description %}
@@ -25,27 +13,6 @@
     This model can be useful in a variety of analytical contexts, including climate modeling, forecasting, and geospatial analysis.
 {% enddocs %}
 
-{% docs base_beverages %}
-    The `base_beverages` model contains data related to various beverages sourced from TheCocktailDB API.
-    The dataset includes details about the beverage name, type, category, and alcoholic content, as well as unique identifiers for each beverage.
-    This model provides valuable information for analyzing drink preferences, categories, and alcoholic content.
-{% enddocs %}
-
-{% docs beverage_name %}
-    The name of the beverage as defined in TheCocktailDB API. This includes cocktails, mocktails, and other types of beverages.
-{% enddocs %}
-
-{% docs beverage_id %}
-    A unique identifier for each beverage. This ID is used to uniquely identify a beverage entry in the database.
-{% enddocs %}
-
-{% docs beverage_type %}
-    The type of the beverage (e.g., Cocktail, Shot, etc.). This helps categorize beverages for easier filtering and analysis.
-{% enddocs %}
-
-{% docs beverage_category_sk %}
-    The category of the beverage, such as "Ordinary Drink", "Cocktail", "Shot", etc. This field is useful for grouping beverages based on category.
-{% enddocs %}
 # C
 {% docs city %}
 The name of the city. This field is typically used as a primary identifier for a location in the dataset.
@@ -62,9 +29,6 @@ The continent where the city is located. This field helps in broader geographic 
 # E
 # F
 # G
-{% docs glass_type %}
-    The specific glass type used for serving the beverage, such as "Collins glass", "Margarita glass", or "Highball glass". This provides more detailed information about how to serve the drink.
-{% enddocs %}
 # H
 {% docs humidity %}
     The relative humidity of the air at a given location, measured as a percentage (%). High humidity levels can affect comfort and play a role in weather events like precipitation.
@@ -109,9 +73,6 @@ The latitude coordinate of the city in decimal degrees. Positive values indicate
     The maximum temperature at a given location, typically measured during a specific time frame (e.g., daily or hourly). This value represents the highest temperature recorded and is often used to analyze extreme weather conditions or heat events.
 {% enddocs %}
 # U
-{% docs uv %}
-    The ultraviolet (UV) index value representing the strength of UV radiation at a given location. The UV index typically ranges from 0 (minimal exposure) to 11+ (extreme exposure), with higher values indicating stronger radiation.
-{% enddocs %}
 # V
 # W
 {% docs wind_speed %}

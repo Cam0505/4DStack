@@ -6,8 +6,11 @@ from pathlib import Path
 import dlt
 import time
 import subprocess
+from dlt.pipeline.exceptions import PipelineNeverRan
+from dlt.destinations.exceptions import DatabaseUndefinedRelation
 from dlt.sources.helpers.rest_client.paginators import JSONLinkPaginator
 from dlt.sources.helpers.rest_client.client import RESTClient
+from path_config import ENV_FILE, DLT_PIPELINE_DIR, DBT_DIR
 
 load_dotenv(dotenv_path="/workspaces/CamOnDagster/.env")
 
@@ -78,24 +81,36 @@ def rick_and_morty_source(context: AssetExecutionContext, current_counts):
         yield make_resource(endpoint, primary_key, current_counts.get(endpoint, 0))(context)
 
 
-@asset(compute_kind="python", group_name="RickAndMorty", tags={"source": "RickAndMorty"})
+@asset(compute_kind="python", group_name="RickAndMorty", tags={"source": "RickAndMorty"}, io_manager_key="mem_io_manager")
 def rick_and_morty_asset(context: AssetExecutionContext) -> bool:
     """Loads characters, episodes, and locations from Rick and Morty API using DLT."""
     context.log.info("🚀 Starting DLT pipeline for Rick and Morty API")
 
     pipeline = dlt.pipeline(
         pipeline_name="rick_and_morty_pipeline",
-        destination=os.getenv("DLT_DESTINATION", "duckdb"),
-        dataset_name="rick_and_morty_data"
+        destination=os.getenv("DLT_DESTINATION", "motherduck"),
+        dataset_name="rick_and_morty_data",
+        pipelines_dir=str(DLT_PIPELINE_DIR),
+        dev_mode=False
     )
 
-    row_counts = pipeline.dataset().row_counts().df()
-    if row_counts is not None:
-        row_counts_dict = dict(
-            zip(row_counts["table_name"], row_counts["row_count"]))
-    else:
+    row_counts_dict = {}
+    try:
+        row_counts = pipeline.dataset().row_counts().df()
+        if row_counts is not None:
+            row_counts_dict = dict(
+                zip(row_counts["table_name"], row_counts["row_count"]))
+    except PipelineNeverRan:
         context.log.warning(
-            "⚠️ No tables found yet in dataset — assuming first run.")
+            "⚠️ No previous runs found for this pipeline. Assuming first run.")
+        row_counts_dict = {}
+    except DatabaseUndefinedRelation:
+        context.log.warning(
+            "⚠️ Table doesn't exist. Assuming deletion.")
+        row_counts_dict = {}
+    except Exception as e:
+        context.log.warning(
+            f"⚠️ Could not get row counts: {e}. Assuming first run.")
         row_counts_dict = {}
 
     source = rick_and_morty_source(context, row_counts_dict)
@@ -124,7 +139,7 @@ def rick_and_morty_asset(context: AssetExecutionContext) -> bool:
 
 
 @asset(deps=["rick_and_morty_asset"], group_name="RickAndMorty",
-       tags={"source": "RickAndMorty"}, required_resource_keys={"dbt"})
+       tags={"source": "RickAndMorty"}, required_resource_keys={"dbt"}, io_manager_key=None)
 def dbt_rick_and_morty_data(context: AssetExecutionContext, rick_and_morty_asset: bool) -> None:
     """Runs dbt models for Rick and Morty API after loading data."""
 
@@ -137,14 +152,27 @@ def dbt_rick_and_morty_data(context: AssetExecutionContext, rick_and_morty_asset
         return
 
     try:
-        invocation = context.resources.dbt.cli(
-            ["build", "--select", "source:rick_and_morty+"],
-            context=context
-        )
+        # Use DbtCliResource properly for regular assets
+        context.log.info("🔧 Running dbt build for Rick and Morty models...")
 
-        # Wait for dbt to finish and get the full stdout log
-        invocation.wait()
-        return
+        # Use the dbt CLI resource directly with explicit commands
+        dbt_cli = context.resources.dbt
+        result = dbt_cli.cli(
+            ["build", "--select", "source:rick_and_morty+"], raise_on_error=False)
+
+        # Wait for completion and handle result
+        exit_code = result.wait()
+
+        if exit_code == 0:
+            context.log.info("✅ dbt build completed successfully!")
+        else:
+            context.log.error(
+                f"❌ dbt build failed with exit code: {exit_code}")
+            # Get stdout and stderr for debugging
+            context.log.error(f"stdout: {result.stdout}")
+            context.log.error(f"stderr: {result.stderr}")
+            raise Exception(f"dbt build failed with exit code: {exit_code}")
+
     except Exception as e:
-        context.log.error(f"dbt build failed:\n{e}")
+        context.log.error(f"dbt build failed: {e}")
         raise

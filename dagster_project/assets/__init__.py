@@ -1,7 +1,5 @@
-from .dbt_assets import camon_dbt_assets
+from .dbt_assets import dbt_4DStack
 from .open_meteo import openmeteo_asset, dbt_meteo_data
-from .Gsheets import gsheet_finance_data, dbt_models
-from .youtube import youtube_pipeline
 from .Beverages import (
     ingredients_table,
     alcoholic_table,
@@ -14,9 +12,7 @@ from .GeoAPI import get_geo_data, dbt_geo_data
 from .rick_and_morty import rick_and_morty_asset, dbt_rick_and_morty_data
 
 __all__ = [
-    "camon_dbt_assets",
-    "gsheet_finance_data",
-    "dbt_models",
+    "dbt_4DStack",
     "ingredients_table",
     "alcoholic_table",
     "beverages_table",
@@ -29,5 +25,4 @@ __all__ = [
     "dbt_rick_and_morty_data",
     "openmeteo_asset",
     "dbt_meteo_data",
-    "youtube_pipeline",
 ]

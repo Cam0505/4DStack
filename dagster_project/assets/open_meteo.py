@@ -221,7 +221,7 @@ def openmeteo_source(cities: dict, base_start_date: date, end_date: date, row_ma
     return weather_resource()
 
 
-@asset(compute_kind="python", group_name="Open_Meteo", tags={"source": "Open_Meteo"})
+@asset(compute_kind="python", group_name="Open_Meteo", tags={"source": "Open_Meteo"}, io_manager_key="mem_io_manager")
 def openmeteo_asset(context: AssetExecutionContext) -> bool:
 
     context.log.info("Starting DLT pipeline...")
@@ -293,7 +293,7 @@ def openmeteo_asset(context: AssetExecutionContext) -> bool:
 
 
 @asset(deps=["openmeteo_asset"], group_name="Open_Meteo",
-       tags={"source": "Open_Meteo"}, required_resource_keys={"dbt"})
+       tags={"source": "Open_Meteo"}, required_resource_keys={"dbt"}, io_manager_key="mem_io_manager")
 def dbt_meteo_data(context: AssetExecutionContext, openmeteo_asset: bool) -> None:
     """Runs the dbt command after loading the data from OpenMeteo API."""
 
@@ -308,7 +308,7 @@ def dbt_meteo_data(context: AssetExecutionContext, openmeteo_asset: bool) -> Non
 
     try:
         invocation = context.resources.dbt.cli(
-            ["build", "--select", "source:meals+"]
+            ["build", "--select", "source:weather+"]
         )
 
         # Wait for dbt to finish and get the full stdout log

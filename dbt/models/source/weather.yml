@@ -1,6 +1,6 @@
 sources:
   - name: weather
-    database: camondagster
+    database: 4dStack
     schema: weather_data
     tables:
       - name: daily_weather

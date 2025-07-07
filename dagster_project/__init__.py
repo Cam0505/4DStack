@@ -1,5 +1,5 @@
 from dagster_project.assets import (
-    camon_dbt_assets,
+    dbt_4DStack,
     get_geo_data,
     dbt_geo_data,
     rick_and_morty_asset,
@@ -11,15 +11,13 @@ from dagster_project.assets import (
     beverage_fact_data,
     dbt_beverage_data,
     openmeteo_asset,
-    dbt_meteo_data,
-    youtube_pipeline,
+    dbt_meteo_data
 )
 from dagster_project.jobs import (
     geo_data_job,
     RickandMorty_job,
-    run_dbt_assets,
-    open_meteo_job,
-    Youtube_Job,
+    dbt_job,
+    open_meteo_job
 )
 from dagster_project.schedules import schedules
 from dagster_project.sensors import dbt_sensor
@@ -27,7 +25,7 @@ from dagster_project.definitions import defs
 
 __all__ = [
     # Assets
-    "camon_dbt_assets",
+    "dbt_4DStack",
     "get_geo_data",
     "dbt_geo_data",
     "rick_and_morty_asset",
@@ -40,13 +38,11 @@ __all__ = [
     "dbt_beverage_data",
     "openmeteo_asset",
     "dbt_meteo_data",
-    "youtube_pipeline",
     # Jobs
     "geo_data_job",
     "RickandMorty_job",
-    "run_dbt_assets",
+    "dbt_job",
     "open_meteo_job",
-    "Youtube_Job",
     # Others
     "schedules",
     "dbt_sensor",

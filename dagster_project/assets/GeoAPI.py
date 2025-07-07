@@ -137,7 +137,7 @@ def geo_source(context: AssetExecutionContext, row_counts_dict: dict):
     return cities
 
 
-@asset(compute_kind="python", group_name="Geo", tags={"source": "Geo"}, io_manager_key=None)
+@asset(compute_kind="python", group_name="Geo", tags={"source": "Geo"}, io_manager_key="mem_io_manager")
 def get_geo_data(context: AssetExecutionContext) -> bool:
 
     context.log.info("Starting DLT pipeline...")
@@ -195,7 +195,7 @@ def get_geo_data(context: AssetExecutionContext) -> bool:
 
 
 @asset(deps=["get_geo_data"], group_name="Geo",
-       tags={"source": "Geo"}, required_resource_keys={"dbt"}, io_manager_key=None)
+       tags={"source": "Geo"}, required_resource_keys={"dbt"}, io_manager_key="mem_io_manager")
 def dbt_geo_data(context: AssetExecutionContext, get_geo_data: bool) -> None:
     """Runs the dbt command after loading the data from Geo API."""
 

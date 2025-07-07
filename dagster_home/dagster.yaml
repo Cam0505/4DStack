@@ -8,7 +8,7 @@ run_storage:
     postgres_db:
       username: dagster
       password: dagster
-      hostname: host.docker.internal
+      hostname: localhost
       db_name: dagster
 
 event_log_storage:
@@ -18,7 +18,7 @@ event_log_storage:
     postgres_db:
       username: dagster
       password: dagster
-      hostname: host.docker.internal
+      hostname: localhost
       db_name: dagster
 
 schedule_storage:
@@ -28,7 +28,7 @@ schedule_storage:
     postgres_db:
       username: dagster
       password: dagster
-      hostname: host.docker.internal
+      hostname: localhost
       db_name: dagster
 
 scheduler:

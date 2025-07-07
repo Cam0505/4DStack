@@ -1,8 +1,9 @@
-from dagster import job
-from dagster_project.assets.dbt_assets import camon_dbt_assets
+from dagster import job, define_asset_job
+from dagster_project.assets.dbt_assets import dbt_4DStack
 
 
-# Define job for DBT assets
-@job
-def run_dbt_assets():
-    camon_dbt_assets()
+dbt_job = define_asset_job(
+    name="dbt_4DStack",
+    # Dagster auto-infers dependency on `geo_data`
+    selection=[dbt_4DStack]
+)

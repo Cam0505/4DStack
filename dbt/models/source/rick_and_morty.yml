@@ -1,6 +1,6 @@
 sources:
   - name: rick_and_morty
-    database: camondagster
+    database: 4dStack
     schema: rick_and_morty_data
     tables:
       - name: character

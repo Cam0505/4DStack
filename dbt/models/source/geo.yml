@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: geo
-    database: camondagster
+    database: 4DStack
     schema: geo_data
 
     tables:
