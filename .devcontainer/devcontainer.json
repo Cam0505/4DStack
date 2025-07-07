@@ -31,7 +31,8 @@
         "ms-python.vscode-pylance",
         "dbt-labs.dbt",
         "github.vscode-github-actions",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "ms-vscode-remote.remote-ssh"
       ]
     }
   },
@@ -39,7 +40,6 @@
     "PYTHONPATH": "/workspaces/4DStack",
     "ENV_FILE": "${containerWorkspaceFolder}/.env",
     "DBT_PROFILES_DIR": "${containerWorkspaceFolder}/dbt",
-    "DAGSTER_HOME": "/workspaces/4DStack/dagster_home",
-
-  },
+    "DAGSTER_HOME": "/workspaces/4DStack/dagster_home"
+  }
 }

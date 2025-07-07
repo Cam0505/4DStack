@@ -12,7 +12,6 @@ dagster-postgres==0.26.18
 
 docker==7.1.0
 # dlt and dependencies
-dlt==1.10.0
 duckdb==1.3.1
 gitdb==4.0.12
 
@@ -32,5 +31,5 @@ psycopg2-binary==2.9.10
 # Additional dependencies for data pipelines
 pyarrow>=10.0.0  # Often needed for pandas/dlt
 sqlalchemy>=2.0.40  # Required by dbt-core
-dlt[motherduck]
+dlt[motherduck]==1.10.0
 sqlfluff==3.4.1
