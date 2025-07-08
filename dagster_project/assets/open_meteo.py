@@ -294,26 +294,29 @@ def openmeteo_asset(context: AssetExecutionContext) -> bool:
 
 @asset(deps=["openmeteo_asset"], group_name="Open_Meteo",
        tags={"source": "Open_Meteo"}, required_resource_keys={"dbt"}, io_manager_key="mem_io_manager")
-def dbt_meteo_data(context: AssetExecutionContext, openmeteo_asset: bool) -> None:
-    """Runs the dbt command after loading the data from OpenMeteo API."""
+def dbt_weather_models(context: AssetExecutionContext, openmeteo_asset: bool) -> None:
+    """Runs weather-related dbt models after loading data from OpenMeteo API."""
 
     if not openmeteo_asset:
         context.log.warning(
-            "\n⚠️  WARNING: DBT SKIPPED\n"
+            "\n⚠️  WARNING: DBT WEATHER MODELS SKIPPED\n"
             "📉 No data was loaded from OpenMeteo API.\n"
-            "🚫 Skipping dbt run.\n"
+            "🚫 Skipping dbt run for weather models.\n"
             "----------------------------------------"
         )
         return
 
     try:
+        # Run all dbt models downstream from the weather source (source:weather+)
+        context.log.info("Running dbt models from source:weather+")
         invocation = context.resources.dbt.cli(
             ["build", "--select", "source:weather+"]
         )
 
         # Wait for dbt to finish and get the full stdout log
         invocation.wait()
+        context.log.info("✅ Weather dbt models completed successfully")
         return
     except Exception as e:
-        context.log.error(f"dbt build failed:\n{e}")
+        context.log.error(f"Weather dbt models failed:\n{e}")
         raise

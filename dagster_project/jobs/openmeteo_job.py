@@ -1,17 +1,9 @@
-from dagster import job, define_asset_job
-from dagster_project.assets.open_meteo import openmeteo_asset, dbt_meteo_data
-
-
-# @job(tags={"source": "Open_Meteo"})
-# def open_meteo_job():
-#     # First, run the gsheet_finance_data asset
-#     outcome = openmeteo_asset()
-
-#     dbt_meteo_data(outcome)
+from dagster import job, define_asset_job, AssetSelection
+from dagster_project.assets.open_meteo import openmeteo_asset, dbt_weather_models
 
 
 open_meteo_job = define_asset_job(
     name="open_meteo_job",
-    # Dagster auto-infers dependency on `openmeteo_asset`
-    selection=[openmeteo_asset, dbt_meteo_data]
+    # Select both the openmeteo asset and the dbt weather models asset
+    selection=AssetSelection.assets(openmeteo_asset, dbt_weather_models)
 )

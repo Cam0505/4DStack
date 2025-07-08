@@ -1,17 +1,9 @@
-from dagster import job, define_asset_job
-from dagster_project.assets.GeoAPI import get_geo_data, dbt_geo_data
+from dagster import job, define_asset_job, AssetSelection
+from dagster_project.assets.GeoAPI import get_geo_data, dbt_geo_models
 
-
-# @job(tags={"source": "Geo"})
-# def geo_data_job():
-#     # First, run the gsheet_finance_data asset
-#     Geo_Data_Present = get_geo_data()
-
-#     # Then, run the dim data asset
-#     dbt_geo_data(Geo_Data_Present)
 
 geo_data_job = define_asset_job(
     name="geo_data_job",
-    # Dagster auto-infers dependency on `geo_data`
-    selection=[get_geo_data, dbt_geo_data]
+    # Select both the raw geo data asset and the dbt geo models asset
+    selection=AssetSelection.assets(get_geo_data, dbt_geo_models)
 )

@@ -139,23 +139,21 @@ def rick_and_morty_asset(context: AssetExecutionContext) -> bool:
 
 
 @asset(deps=["rick_and_morty_asset"], group_name="RickAndMorty",
-       tags={"source": "RickAndMorty"}, required_resource_keys={"dbt"}, io_manager_key=None)
-def dbt_rick_and_morty_data(context: AssetExecutionContext, rick_and_morty_asset: bool) -> None:
-    """Runs dbt models for Rick and Morty API after loading data."""
+       tags={"source": "RickAndMorty"}, required_resource_keys={"dbt"}, io_manager_key="mem_io_manager")
+def dbt_rick_and_morty_models(context: AssetExecutionContext, rick_and_morty_asset: bool) -> None:
+    """Runs Rick and Morty specific dbt models after loading data."""
 
     if not rick_and_morty_asset:
         context.log.warning(
-            "\n⚠️  WARNING: DBT SKIPPED\n"
+            "\n⚠️  WARNING: DBT RICK AND MORTY MODELS SKIPPED\n"
             "📉 No data was loaded from Rick and Morty API.\n"
-            "🚫 Skipping dbt run.\n"
+            "🚫 Skipping dbt run for Rick and Morty models.\n"
         )
         return
 
     try:
-        # Use DbtCliResource properly for regular assets
-        context.log.info("🔧 Running dbt build for Rick and Morty models...")
-
-        # Use the dbt CLI resource directly with explicit commands
+        # Run all dbt models downstream from the Rick and Morty source (source:rick_and_morty+)
+        context.log.info("Running dbt models from source:rick_and_morty+")
         dbt_cli = context.resources.dbt
         result = dbt_cli.cli(
             ["build", "--select", "source:rick_and_morty+"], raise_on_error=False)
@@ -164,15 +162,17 @@ def dbt_rick_and_morty_data(context: AssetExecutionContext, rick_and_morty_asset
         exit_code = result.wait()
 
         if exit_code == 0:
-            context.log.info("✅ dbt build completed successfully!")
+            context.log.info(
+                "✅ Rick and Morty dbt models completed successfully!")
         else:
             context.log.error(
-                f"❌ dbt build failed with exit code: {exit_code}")
+                f"❌ Rick and Morty dbt models failed with exit code: {exit_code}")
             # Get stdout and stderr for debugging
             context.log.error(f"stdout: {result.stdout}")
             context.log.error(f"stderr: {result.stderr}")
-            raise Exception(f"dbt build failed with exit code: {exit_code}")
+            raise Exception(
+                f"Rick and Morty dbt models failed with exit code: {exit_code}")
 
     except Exception as e:
-        context.log.error(f"dbt build failed: {e}")
+        context.log.error(f"Rick and Morty dbt models failed: {e}")
         raise

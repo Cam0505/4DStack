@@ -196,26 +196,29 @@ def get_geo_data(context: AssetExecutionContext) -> bool:
 
 @asset(deps=["get_geo_data"], group_name="Geo",
        tags={"source": "Geo"}, required_resource_keys={"dbt"}, io_manager_key="mem_io_manager")
-def dbt_geo_data(context: AssetExecutionContext, get_geo_data: bool) -> None:
-    """Runs the dbt command after loading the data from Geo API."""
+def dbt_geo_models(context: AssetExecutionContext, get_geo_data: bool) -> None:
+    """Runs geo-related dbt models after loading data from Geo API."""
 
     if not get_geo_data:
         context.log.warning(
-            "\n⚠️  WARNING: DBT SKIPPED\n"
+            "\n⚠️  WARNING: DBT GEO MODELS SKIPPED\n"
             "📉 No data was loaded from GeoAPI.\n"
-            "🚫 Skipping dbt run.\n"
+            "🚫 Skipping dbt run for geo models.\n"
             "----------------------------------------"
         )
         return
 
     try:
+        # Run all dbt models downstream from the geo source (source:geo+)
+        context.log.info("Running dbt models from source:geo+")
         invocation = context.resources.dbt.cli(
             ["build", "--select", "source:geo+"]
         )
 
         # Wait for dbt to finish and get the full stdout log
         invocation.wait()
+        context.log.info("✅ Geo dbt models completed successfully")
         return
     except Exception as e:
-        context.log.error(f"dbt build failed:\n{e}")
+        context.log.error(f"Geo dbt models failed:\n{e}")
         raise

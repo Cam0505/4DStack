@@ -1,14 +1,14 @@
 
-# dbt and MySQL adapter
+# dbt and duckdb adapter
 dbt-core==1.9.4
-dbt-duckdb==1.9.3
+dbt-duckdb==1.9.4
 # Core Dagster
-dagster==1.10.18
-dagster-webserver==1.10.18
-dagster-dbt==0.26.18
-dagster-dlt==0.26.18
-dagster-duckdb-pandas==0.26.18
-dagster-postgres==0.26.18
+dagster==1.11.1
+dagster-webserver==1.11.1
+dagster-dbt==0.27.1
+dagster-dlt==0.27.1
+dagster-duckdb-pandas==0.27.1
+dagster-postgres==0.27.1
 
 docker==7.1.0
 # dlt and dependencies
@@ -18,14 +18,14 @@ gitdb==4.0.12
 google-auth==2.40.0
 
 # Data processing
-pandas==2.2.3
-numpy==2.2.5  
+pandas==2.3.1
+numpy==2.3.1
 
 # Google Sheets
-gspread==6.2.0
+gspread==6.2.1
  
 # Development tools
-python-dotenv==1.1.0
+python-dotenv==1.1.1
 psycopg2-binary==2.9.10
 
 # Additional dependencies for data pipelines
@@ -33,3 +33,9 @@ pyarrow>=10.0.0  # Often needed for pandas/dlt
 sqlalchemy>=2.0.40  # Required by dbt-core
 dlt[motherduck]==1.10.0
 sqlfluff==3.4.1
+
+# For Public Holidays
+holidays==0.76
+
+playwright==1.53.0
+fake_useragent==2.2.0

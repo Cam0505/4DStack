@@ -1,10 +1,10 @@
 version: 2
 models:
 - name: dim_date
-  description: ''
+  description: '{{ doc("dim_date_description") }}'
   columns:
   - name: date_col
-    description: ''
+    description: '{{ doc("date_col") }}'
     data_tests:
       - unique
       - not_null
@@ -15,16 +15,82 @@ models:
   - name: day
     description: ''
   - name: month_name
-    description: ''
+    description: '{{ doc("month_name") }}'
   - name: weekday_name
-    description: ''
+    description: '{{ doc("weekday_name") }}'
   - name: day_of_week
-    description: ''
+    description: '{{ doc("day_of_week") }}'
   - name: is_weekend
-    description: ''
+    description: '{{ doc("is_weekend") }}'
   - name: day_of_year
     description: ''
   - name: week_of_year
     description: ''
   - name: quarter
     description: ''
+  - name: season
+    description: '{{ doc("season") }}'
+  - name: is_school_holiday_period
+    description: '{{ doc("is_school_holiday_period") }}'
+  - name: is_peak_travel
+    description: '{{ doc("is_peak_travel") }}'
+  - name: days_to_next_major_holiday
+    description: '{{ doc("days_to_next_major_holiday") }}'
+  - name: is_long_weekend
+    description: '{{ doc("is_long_weekend") }}'
+  - name: is_holiday_nz
+    description: '{{ doc("is_holiday_nz") }}'
+  - name: holiday_name_nz
+    description: '{{ doc("holiday_name_nz") }}'
+  - name: is_holiday_au_national
+    description: '{{ doc("is_holiday_au_national") }}'
+  - name: is_holiday_au_nsw
+    description: '{{ doc("is_holiday_au_state") }}'
+  - name: holiday_name_au_nsw
+    description: '{{ doc("holiday_name_au_state") }}'
+  - name: is_holiday_au_vic
+    description: '{{ doc("is_holiday_au_state") }}'
+  - name: holiday_name_au_vic
+    description: '{{ doc("holiday_name_au_state") }}'
+  - name: is_holiday_au_qld
+    description: '{{ doc("is_holiday_au_state") }}'
+  - name: holiday_name_au_qld
+    description: '{{ doc("holiday_name_au_state") }}'
+  - name: is_holiday_au_wa
+    description: '{{ doc("is_holiday_au_state") }}'
+  - name: holiday_name_au_wa
+    description: '{{ doc("holiday_name_au_state") }}'
+  - name: is_holiday_au_sa
+    description: '{{ doc("is_holiday_au_state") }}'
+  - name: holiday_name_au_sa
+    description: '{{ doc("holiday_name_au_state") }}'
+  - name: is_holiday_au_tas
+    description: '{{ doc("is_holiday_au_state") }}'
+  - name: holiday_name_au_tas
+    description: '{{ doc("holiday_name_au_state") }}'
+  - name: is_holiday_au_act
+    description: '{{ doc("is_holiday_au_state") }}'
+  - name: holiday_name_au_act
+    description: '{{ doc("holiday_name_au_state") }}'
+  - name: is_holiday_au_nt
+    description: '{{ doc("is_holiday_au_state") }}'
+  - name: holiday_name_au_nt
+    description: '{{ doc("holiday_name_au_state") }}'
+  - name: is_school_holiday_au_nsw
+    description: '{{ doc("is_school_holiday_au_state") }}'
+  - name: is_school_holiday_au_vic
+    description: '{{ doc("is_school_holiday_au_state") }}'
+  - name: is_school_holiday_au_qld
+    description: '{{ doc("is_school_holiday_au_state") }}'
+  - name: is_school_holiday_au_wa
+    description: '{{ doc("is_school_holiday_au_state") }}'
+  - name: is_school_holiday_au_sa
+    description: '{{ doc("is_school_holiday_au_state") }}'
+  - name: is_school_holiday_au_tas
+    description: '{{ doc("is_school_holiday_au_state") }}'
+  - name: is_school_holiday_au_act
+    description: '{{ doc("is_school_holiday_au_state") }}'
+  - name: is_school_holiday_au_nt
+    description: '{{ doc("is_school_holiday_au_state") }}'
+  - name: is_school_holiday_nz
+    description: '{{ doc("is_school_holiday_nz") }}'

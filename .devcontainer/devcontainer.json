@@ -17,7 +17,7 @@
       "moby": true
     }
   },
-  "postStartCommand": ".devcontainer/startup.sh",
+  "postStartCommand": "bash /workspaces/4DStack/.devcontainer/startup.sh",
   "remoteUser": "vscode",
   "customizations": {
     "vscode": {

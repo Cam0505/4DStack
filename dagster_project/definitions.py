@@ -1,10 +1,11 @@
 
-from dagster_project.assets import openmeteo_asset, dbt_meteo_data
+from dagster_project.assets import openmeteo_asset, dbt_weather_models
+from dagster_project.assets.dbt_assets import dbt_models, dbt_common_models
 from dagster_project.jobs import open_meteo_job
 from dagster_project.jobs import geo_data_job
-from dagster_project.assets import get_geo_data, dbt_geo_data
+from dagster_project.assets import get_geo_data, dbt_geo_models
 from dagster_project.jobs import RickandMorty_job
-from dagster_project.assets import rick_and_morty_asset, dbt_rick_and_morty_data
+from dagster_project.assets import rick_and_morty_asset, dbt_rick_and_morty_models
 from dagster_project.sensors import dbt_sensor
 from dagster_project.schedules import schedules
 
@@ -21,15 +22,21 @@ if not MotherDuck:
     raise ValueError(
         "Environment variable 'MD' is not set. Set it to your MotherDuck connection string (e.g., md:?token=...)."
     )
-# definitions.py
 
-# Import Rick and Morty assets and jobs (active)
-
-
-# Define the assets
+# Define the assets - include pipeline assets and their specific dbt models
 all_assets = [
-    rick_and_morty_asset, dbt_rick_and_morty_data,
-    get_geo_data, dbt_geo_data, openmeteo_asset, dbt_meteo_data
+    # Raw data pipeline assets
+    rick_and_morty_asset,
+    get_geo_data,
+    openmeteo_asset,
+    # Specific dbt model assets for each pipeline
+    dbt_rick_and_morty_models,
+    dbt_geo_models,
+    dbt_weather_models,
+    # Common dbt models (like dim_date) that don't depend on source data
+    dbt_common_models,
+    # Global dbt asset (for any remaining models)
+    # dbt_models,
 ]
 
 # Register the job, sensor, and schedule in the Definitions
