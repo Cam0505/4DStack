@@ -19,11 +19,13 @@ done
 
 echo "Postgres is ready."
 
-# Verify Playwright installation
-echo "Verifying Playwright installation..."
-if ! python -c "from playwright.async_api import async_playwright" 2>/dev/null; then
-    echo "Installing Playwright browsers..."
+
+# Only install if Chromium browser binary is missing
+if [ ! -f /home/vscode/.cache/ms-playwright/chromium-*/chrome-linux/chrome ]; then
+    echo "Chromium browser not found, installing..."
     python -m playwright install chromium
+else
+    echo "Chromium browser already installed."
 fi
 
 # Start Dagster dev in the background

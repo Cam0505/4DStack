@@ -1,0 +1,35 @@
+origin,destination,departure_date,price,price_text,scrape_time,proxy_used,proxy_region,accept_language,user_agent,url,error
+ZQN,SYD,2025-08-03,683.0,from A$683,2025-07-13T11:00:26.015391,none,Local,en-AU,Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD...,https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03,
+ZQN,SYD,2025-08-03,,,2025-07-13T11:00:31.672208,http://user:pass@us-proxy.example.com:8080,US,en-NZ,Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac...,https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03,"Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03
+Call log:
+  - navigating to ""https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03"", waiting until ""load""
+"
+ZQN,SYD,2025-08-03,,,2025-07-13T11:00:35.621682,http://user:pass@uk-proxy.example.com:8080,UK,en-AU,Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac...,https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03,"Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03
+Call log:
+  - navigating to ""https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03"", waiting until ""load""
+"
+ZQN,SYD,2025-08-03,,,2025-07-13T11:00:39.283898,http://user:pass@au-proxy.example.com:8080,AU,en-US,Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537...,https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03,"Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03
+Call log:
+  - navigating to ""https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03"", waiting until ""load""
+"
+ZQN,SYD,2025-08-03,,,2025-07-13T11:00:42.834295,http://user:pass@sg-proxy.example.com:8080,SG,en-US,Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac...,https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03,"Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03
+Call log:
+  - navigating to ""https://www.google.com/travel/flights?q=Flights%20from%20ZQN%20to%20SYD%20on%202025-08-03"", waiting until ""load""
+"
+CHC,MEL,2025-08-03,499.0,from A$499,2025-07-13T11:00:57.827770,none,Local,en-NZ,Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac...,https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03,
+CHC,MEL,2025-08-03,,,2025-07-13T11:01:01.721349,http://user:pass@us-proxy.example.com:8080,US,en-AU,Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac...,https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03,"Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03
+Call log:
+  - navigating to ""https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03"", waiting until ""load""
+"
+CHC,MEL,2025-08-03,,,2025-07-13T11:01:06.564850,http://user:pass@uk-proxy.example.com:8080,UK,en-AU,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...,https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03,"Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03
+Call log:
+  - navigating to ""https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03"", waiting until ""load""
+"
+CHC,MEL,2025-08-03,,,2025-07-13T11:01:10.985444,http://user:pass@au-proxy.example.com:8080,AU,en-US,Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac...,https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03,"Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03
+Call log:
+  - navigating to ""https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03"", waiting until ""load""
+"
+CHC,MEL,2025-08-03,,,2025-07-13T11:01:16.464682,http://user:pass@sg-proxy.example.com:8080,SG,en-AU,Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac...,https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03,"Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03
+Call log:
+  - navigating to ""https://www.google.com/travel/flights?q=Flights%20from%20CHC%20to%20MEL%20on%202025-08-03"", waiting until ""load""
+"

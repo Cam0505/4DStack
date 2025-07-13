@@ -14,9 +14,10 @@ from fake_useragent import UserAgent
 # Test configuration - replace with real proxies if available
 PROXIES = [
     {"server": None, "region": "Local"},
-    # {"server": "http://user:pass@nz-proxy.com:8080", "region": "NZ"},
-    # {"server": "http://user:pass@au-proxy.com:8080", "region": "AU"},
-    # {"server": "http://user:pass@sg-proxy.com:8080", "region": "SG"},
+    {"server": "http://user:pass@us-proxy.example.com:8080", "region": "US"},
+    {"server": "http://user:pass@uk-proxy.example.com:8080", "region": "UK"},
+    {"server": "http://user:pass@au-proxy.example.com:8080", "region": "AU"},
+    {"server": "http://user:pass@sg-proxy.example.com:8080", "region": "SG"}
 ]
 
 # Test routes - AU/NZ destinations
@@ -123,10 +124,11 @@ async def test_single_scrape(debug=True):
     user_agent = ua.random
 
     playwright = await async_playwright().start()
+    browser = None
 
     try:
         # Visible for debugging
-        browser = await playwright.chromium.launch(headless=False)
+        browser = await playwright.chromium.launch(headless=True, args=["--no-sandbox"])
         context = await browser.new_context(
             user_agent=user_agent,
             locale="en-AU"
@@ -147,13 +149,9 @@ async def test_single_scrape(debug=True):
 
         print(f"Result: {result}")
 
-        # Keep browser open for manual inspection
-        if debug:
-            print("Browser will stay open for 30 seconds for manual inspection...")
-            await page.wait_for_timeout(30000)
-
     finally:
-        await browser.close()
+        if browser is not None:
+            await browser.close()
         await playwright.stop()
 
     return result
@@ -191,21 +189,22 @@ async def scrape_all_routes(limit_routes=2, debug=False):
             user_agent = ua.random
             locale = random.choice(["en-US", "en-NZ", "en-AU"])
 
-            print(f"  Proxy {j+1}: {region} | Locale: {locale}")
+            print(
+                f"  Proxy {j+1}: {region} | Server: {proxy_server or 'none'} | Locale: {locale}")
 
             # Browser configuration
-            browser_args = {
-                "headless": not debug,  # Visible if debug mode
-            }
-
+            browser = await playwright.chromium.launch(headless=not debug, args=["--no-sandbox"])
             if proxy_server:
-                browser_args["proxy"] = {"server": proxy_server}
-
-            browser = await playwright.chromium.launch(**browser_args)
-            context = await browser.new_context(
-                user_agent=user_agent,
-                locale=locale
-            )
+                context = await browser.new_context(
+                    user_agent=user_agent,
+                    locale=locale,
+                    proxy={"server": proxy_server}
+                )
+            else:
+                context = await browser.new_context(
+                    user_agent=user_agent,
+                    locale=locale
+                )
             page = await context.new_page()
 
             try:
